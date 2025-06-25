@@ -1,0 +1,99 @@
+{% extends 'student/studentbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        .order-card {
+            color: #fff; /* White text for better contrast */
+        }
+
+        .bg-c-blue {
+            background: #007BFF;
+        }
+
+        .bg-c-green {
+            background: #28A745;
+        }
+
+        .bg-c-yellow {
+            background: #FFC107;
+        }
+
+        .bg-c-pink {
+            background: #E83E8C;
+        }
+
+        .card {
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            border: none; /* Remove default border */
+            margin-bottom: 30px; /* Space between cards */
+            transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
+            border-radius: 10px; /* Rounded corners */
+            height: 100px; /* Reduced height for smaller dimensions */
+        }
+
+        .card .card-block {
+            padding: 25px;
+        }
+
+        .order-card i {
+            font-size: 26px;
+        }
+
+        .f-left {
+            float: left;
+        }
+
+        .f-right {
+            float: right;
+        }
+
+        .container {
+            margin-top: 30px; /* Space above the container */
+        }
+
+        @media (max-width: 768px) {
+            .col-md-4 {
+                margin-bottom: 20px; /* Space between cards on smaller screens */
+            }
+        }
+    </style>
+</head>
+
+<div class="container">
+  <h2 class="text-center text-primary mb-4">Dashboard</h2>
+    <div class="row justify-content-start">
+        <div class="col-md-4 col-xl-6">
+            <div class="card bg-c-blue order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20">Total Exams Available</h6>
+                    <h2 class="text-right"><i class="fas fa-book f-left"></i><span>{{ total_course }}</span></h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xl-6">
+            <div class="card bg-c-green order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20">Total Questions</h6>
+                    <h2 class="text-right"><i class="fas fa-question-circle f-left"></i><span>{{ total_question }}</span></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+{% endblock content %}

@@ -1,0 +1,113 @@
+{% extends 'quiz/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            background-color: #f4f7fa; /* Light background for the body */
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            border: none; /* Remove default border */
+            border-radius: 10px; /* Rounded corners */
+            transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
+        }
+
+        .card:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow on hover */
+        }
+
+        .order-card {
+            color: #fff; /* White text color */
+        }
+
+        .bg-c-blue {
+            background: #007bff; /* Bootstrap primary color */
+        }
+
+        .bg-c-green {
+            background: #28a745; /* Bootstrap success color */
+        }
+
+        .bg-c-yellow {
+            background: #ffc107; /* Bootstrap warning color */
+        }
+
+        .bg-c-pink {
+            background: #dc3545; /* Bootstrap danger color */
+        }
+
+        .card-block {
+            padding: 20px; /* Padding inside the card */
+        }
+
+        .f-left {
+            float: left; /* Float left for icons */
+        }
+
+        .text-right {
+            text-align: right; /* Align text to the right */
+        }
+
+        h6 {
+            font-weight: bold; /* Bold headings */
+        }
+
+        .container {
+            margin-top: 30px; /* Top margin for the container */
+        }
+    </style>
+</head>
+
+<div class="container">
+    <h2 class="text-center text-primary mb-4">Dashboard</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card bg-c-blue order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20"><a href="admin-view-student" style="color:white;">Total Students</a></h6>
+                    <h2 class="text-right"><i class="fas fa-user-graduate f-left"></i><span>{{ total_student }}</span></h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card bg-c-green order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20"><a href="admin-view-teacher" style="color:white;">Total Teachers</a></h6>
+                    <h2 class="text-right"><i class="fas fa-chalkboard-teacher f-left"></i><span>{{ total_teacher }}</span></h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card bg-c-yellow order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20"><a href="admin-view-course" style="color:white;">Total Courses</a></h6>
+                    <h2 class="text-right"><i class="fas fa-book f-left"></i><span>{{ total_course }}</span></h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card bg-c-pink order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20"><a href="admin-view-question" style="color:white;">Total Questions</a></h6>
+                    <h2 class="text-right"><i class="fas fa-question-circle f-left"></i><span>{{ total_question }}</span></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+{% endblock content %}

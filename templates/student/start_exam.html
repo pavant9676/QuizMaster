@@ -1,0 +1,174 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #f8f9fa, #e3e3e3);
+    }
+
+    .exam-container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .question-title {
+      font-size: 22px;
+      font-weight: bold;
+      color: #0056b3;
+    }
+
+    .marks-info {
+      text-align: right;
+      font-weight: bold;
+      color: #d9534f;
+    }
+
+    .form-check {
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .form-check:hover {
+      background: #e0e0e0;
+    }
+
+    .btn-submit {
+      width: 100%;
+      font-size: 20px;
+      font-weight: bold;
+      background-color: #28a745;
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #218838;
+    }
+
+    .question-list {
+      margin-bottom: 20px;
+    }
+
+    .question-item {
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .solved {
+      color: green;
+    }
+
+    .unsolved {
+      color: #0056b3;
+    }
+
+    .checked {
+      color: green;
+    }
+
+    .unchecked {
+      color: #0056b3;
+    }
+  </style>
+</head>
+
+<br>
+<div class="container my-5">
+  <!-- Question list section -->
+  <div class="question-list text-center">
+    {% for q in questions %}
+    <span class="question-item unchecked" id="question-list-{{ forloop.counter }}" onclick="showQuestion({{ forloop.counter }})">
+      <input type="checkbox" id="checkbox-{{ forloop.counter }}" class="question-checkbox"> {{ forloop.counter }}
+    </span>
+    {% endfor %}
+  </div>
+
+  <div class="exam-container">
+    <h2 class="text-center text-primary">📖 {{ course.course_name }}</h2>
+
+    <form class="form mt-4" autocomplete="off" onsubmit="return saveAns()" action="/student/calculate-marks" method="POST">
+      {% csrf_token %}
+      {% for q in questions %}
+      <div class="mb-4 question-section" id="question-{{ forloop.counter }}" style="display: none;">
+        <h5 class="question-title">{{ forloop.counter }}. {{ q.question }}</h5>
+        <h6 class="marks-info">[Marks: {{ q.marks }}]</h6>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="answer-{{ forloop.counter }}" id="option1-{{ forloop.counter }}" value="Option1" onchange="markAnswered({{ forloop.counter }})">
+          <label class="form-check-label" for="option1-{{ forloop.counter }}">{{ q.option1 }}</label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="answer-{{ forloop.counter }}" id="option2-{{ forloop.counter }}" value="Option2" onchange="markAnswered({{ forloop.counter }})">
+          <label class="form-check-label" for="option2-{{ forloop.counter }}">{{ q.option2 }}</label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="answer-{{ forloop.counter }}" id="option3-{{ forloop.counter }}" value="Option3" onchange="markAnswered({{ forloop.counter }})">
+          <label class="form-check-label" for="option3-{{ forloop.counter }}">{{ q.option3 }}</label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="answer-{{ forloop.counter }}" id="option4-{{ forloop.counter }}" value="Option4" onchange="markAnswered({{ forloop.counter }})">
+          <label class="form-check-label" for="option4-{{ forloop.counter }}">{{ q.option4 }}</label>
+        </div>
+      </div>
+      {% endfor %}
+
+      <button type="button" class="btn btn-primary" id="nextQuestion">Next</button>
+      <button type="submit" class="btn btn-submit" style="display: none;">🚀 Submit Exam</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  let currentQuestion = 1;
+  const totalQuestions = {{ questions|length }};
+
+  document.getElementById("question-" + currentQuestion).style.display = "block";
+
+  document.getElementById("nextQuestion").addEventListener("click", function () {
+    document.getElementById("question-" + currentQuestion).style.display = "none";
+    currentQuestion++;
+    if (currentQuestion <= totalQuestions) {
+      document.getElementById("question-" + currentQuestion).style.display = "block";
+    } else {
+      document.getElementById("nextQuestion").style.display = "none";
+      document.querySelector(".btn-submit").style.display = "block";
+    }
+  });
+
+  function showQuestion(questionNumber) {
+    // Hide current question and display the selected one
+    document.getElementById("question-" + currentQuestion).style.display = "none";
+    currentQuestion = questionNumber;
+    document.getElementById("question-" + currentQuestion).style.display = "block";
+  }
+
+  function markAnswered(questionNumber) {
+    // Mark question as answered by checking the checkbox
+    document.getElementById("checkbox-" + questionNumber).checked = true;
+    document.getElementById("question-list-" + questionNumber).classList.remove("unchecked");
+    document.getElementById("question-list-" + questionNumber).classList.add("checked");
+  }
+</script>
+
+{% endblock content %}

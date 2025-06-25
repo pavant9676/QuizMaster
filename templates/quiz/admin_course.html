@@ -1,0 +1,99 @@
+{% extends 'quiz/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            background-color: #f4f7fa; /* Light background for the body */
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            border: none; /* Remove default border */
+            border-radius: 10px; /* Rounded corners */
+            transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
+            margin-bottom: 20px; /* Space between cards */
+            height: 100px; /* Reduced height for smaller dimensions */
+        }
+
+        .card:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow on hover */
+        }
+
+        .order-card {
+            color: #fff; /* White text color */
+        }
+
+        .bg-c-blue {
+            background: #007bff; /* Bootstrap primary color */
+        }
+
+        .bg-c-green {
+            background: #28a745; /* Bootstrap success color */
+        }
+
+        .card-block {
+            padding: 30px; /* Padding inside the card */
+            display: flex; /* Use flexbox */
+            flex-direction: column; /* Stack children vertically */
+            justify-content: center; /* Center content vertically */
+            height: 100%; /* Full height of the card */
+        }
+
+        .f-left {
+            float: left; /* Float left for icons */
+        }
+
+        .text-right {
+            text-align: right; /* Align text to the right */
+        }
+
+        h6 {
+            font-weight: bold; /* Bold headings */
+        }
+
+        .container {
+            margin-top: 30px; /* Top margin for the container */
+        }
+
+        @media (max-width: 768px) {
+            .col-md-4 {
+                margin-bottom: 20px; /* Space between cards on smaller screens */
+            }
+        }
+    </style>
+</head>
+
+<div class="container">
+    <h2 class="text-center text-primary mb-4">Course Management</h2>
+    <div class="row justify-content-start"> <!-- Align cards to the left -->
+        <div class="col-md-6 col-sm-12">
+            <div class="card bg-c-blue order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20"><a href="admin-add-course" style="color:white;">Add Course</a></h6>
+                    <h2 class="text-right"><i class="fas fa-plus f-left"></i></h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="card bg-c-green order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20"><a href="admin-view-course" style="color:white;">View Course</a></h6>
+                    <h2 class="text-right"><i class="fas fa-eye f-left"></i></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+{% endblock content %}
